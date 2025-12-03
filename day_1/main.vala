@@ -9,24 +9,24 @@ void main(string []args) {
 			commands[i] = commands[i].substring(1);
 			tmp = commands[i].to_int();
 			start -= tmp;
-			if (start == 0)
-				counter++;
 			while (start < 0) {
+				if (start + tmp != 0)
+					counter++;
 				start += 100;
-				counter++;
 			}
 		}
 		else if (commands[i][0] == 'R') {
 			commands[i] = commands[i].substring(1);
 			tmp = commands[i].to_int();
 			start += tmp;
-			if (start == 0)
-				counter++;
 			while (start > 99) {
+				if (start != 100)
+					counter++;
 				start -= 100;
-				counter++;
 			}
 		}
+		if (start == 0)
+			counter++;
 	}
 	print ("counter : %d\n", counter);
 }
