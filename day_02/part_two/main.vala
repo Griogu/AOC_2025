@@ -1,23 +1,26 @@
 void	main(string []args) {
 	string []tab, elements;
-	string tmp = null, tmp2 = null;
+	string? tmp = null, tmp2 = null;
 	long first_element, second_element, result = 0;
 
 	tab = args[1].split(",");
-	for (size_t i = 0; tab[i] != null; i++) {
-		elements = tab[i].split("-");
+	foreach (var number in tab) {
+		elements = number.split("-");
 
 		first_element = elements[0].to_long();
 		second_element = elements[1].to_long();
 
+		var elem = elements[0];
+
 		while (first_element <= second_element) {
-			elements[0] = first_element.to_string();
-			if (elements[0].length % 2 == 0) {
-				tmp = elements[0].substring(0, elements[0].length / 2);
-				tmp2 = elements[0].substring(elements[0].length / 2, elements[0].length / 2);
+			elem = first_element.to_string();
+			var middle = elem.length / 2;
+			if (elem.length % 2 == 0) {
+				tmp = elem[:middle];
+				tmp2 = elem[middle:];
 			}
 			if (tmp != null && tmp2 != null && strcmp(tmp, tmp2) == 0) {
-				result += elements[0].to_long();
+				result += elem.to_long();
 			}
 
 			first_element++;
@@ -25,6 +28,5 @@ void	main(string []args) {
 			tmp2 = null;
 		}
 	}
-
 	print ("result : %lu\n", result);
 }
