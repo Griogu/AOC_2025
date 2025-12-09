@@ -1,15 +1,8 @@
 void	main (string []args) {
 	string []tab = args[1].split ("\n");
-	int	counter = 0;
-	long	result = 0;
+	string []operator = tab[tab.length - 1].split (" ");
 
-	while (counter < tab[0].length) {
-		var tmp2 = "";
-		foreach (unowned var element in tab) {
-			var operators = tab[tab.length - 1].split ("\n");
-			var tmp = element.split (" ");
-			if ()
-		}
-		counter++;
+	foreach (unowned var element in tab) {
+		var tmp = element.split(" ");
 	}
 }
