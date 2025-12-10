@@ -13,7 +13,6 @@ void	main (string []args) {
 		if (counter == tab.length - 1)
 			break ;
 	}
-	foreach (unowned var element in operator)
 	for (int i = 0; i < operator.length; i++) {
 		long tmp = numbers[0, i];
 		for (int j = 1; j < tab.length - 1; j++) {
