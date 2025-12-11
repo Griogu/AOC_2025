@@ -4,22 +4,49 @@ void	main (string []args) {
 
 	string []tab = content.split ("\n");
 
-	var result = 0;
-	for (int j = 0; tab[j] != null; j++) {
-		for (int i = 0; tab[j][i] != '\0'; i++) {
+	long result = 0;
+	for (var j = 0; tab[j] != null; j++) {
+		for (var i = 0; tab[j][i] != '\0'; i++) {
 			if (tab[j][i] == 'S')
 				tab[j + 1].data[i] = '|';
 			if (tab[j][i] == '^' && tab[j - 1][i] == '|') {
 				tab[j].data[i - 1] = '|';
 				tab[j].data[i + 1] = '|';
-				result++;
 			}
 			if (j != 0 && tab[j - 1][i] == '|' && tab[j][i] != '^')
 				tab[j].data[i] = '|';
 		}
 	}
-	foreach (unowned var element in tab) {
-		print (element + "\n");
+	var new_tab = new long[tab.length, tab[0].length + 1];
+	for (var i = 0; i < tab.length; i++) {
+		for (var j = 0; j < tab[0].length; j++) {
+			if (tab[i][j] == '.')
+				new_tab[i, j] = 0;
+			if (tab[i][j] == 'S') {
+				new_tab[i, j] = 1;
+				new_tab[i + 1, j] = 1;
+			}
+			if (tab[i][j] == '^') {
+				new_tab[i,  j - 1] += new_tab[i - 1, j];
+				new_tab[i,  j + 1] += new_tab[i - 1, j];
+			}
+			if (new_tab[i - 1, j] != 0 && tab[i][j] != '^' && tab[i][j - 1] == '^')
+				new_tab[i, j] += new_tab[i - 1, j];
+			else if (new_tab[i - 1, j] != 0 && tab[i][j] != '^')
+				new_tab[i, j] = new_tab[i - 1, j];
+		}
 	}
-	print ("result : %d\n", result);
+	for (var i = 0; i < tab.length - 1; i++) {
+		// for (var j = 0; tab[i][j] != '\0'; j++) {
+			// print ("%c, ", tab[i][j]);
+		// }
+		// print ("\n");
+		for (var j = 0; j < tab[0].length; j++) {
+			// print ("%lu, ", new_tab[i, j]);
+			if (i == tab.length - 2)
+				result += new_tab[i, j];
+		}
+		// print ("\n");
+	}
+	print ("result : %lu\n", result);
 }
