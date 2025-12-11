@@ -27,26 +27,21 @@ void	main (string []args) {
 				new_tab[i + 1, j] = 1;
 			}
 			if (tab[i][j] == '^') {
+				new_tab[i, j] = 0;
 				new_tab[i,  j - 1] += new_tab[i - 1, j];
 				new_tab[i,  j + 1] += new_tab[i - 1, j];
 			}
-			if (new_tab[i - 1, j] != 0 && tab[i][j] != '^' && tab[i][j - 1] == '^')
+			if (i != 0 && new_tab[i - 1, j] != 0 && tab[i][j] != '^' && tab[i][j - 1] == '^')
 				new_tab[i, j] += new_tab[i - 1, j];
-			else if (new_tab[i - 1, j] != 0 && tab[i][j] != '^')
+			else if (i != 0 && new_tab[i - 1, j] != 0 && tab[i][j] != '^')
 				new_tab[i, j] = new_tab[i - 1, j];
 		}
 	}
 	for (var i = 0; i < tab.length - 1; i++) {
-		// for (var j = 0; tab[i][j] != '\0'; j++) {
-			// print ("%c, ", tab[i][j]);
-		// }
-		// print ("\n");
 		for (var j = 0; j < tab[0].length; j++) {
-			// print ("%lu, ", new_tab[i, j]);
 			if (i == tab.length - 2)
 				result += new_tab[i, j];
 		}
-		// print ("\n");
 	}
 	print ("result : %lu\n", result);
 }
